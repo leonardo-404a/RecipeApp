@@ -1,0 +1,26 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h1 class="login-title">Registrar</h1>
+  <div class="login-form-group">
+    <input type="text" formControlName="username" placeholder="Nome" />
+  </div>
+  <div class="login-form-group">
+    <input type="email" formControlName="email" placeholder="Email" />
+  </div>
+  <div class="login-form-group">
+    <input type="password" formControlName="password" placeholder="Senha" />
+  </div>
+  <div *ngIf="formInvalid()" class="login-alert login-alert-danger">
+    <p *ngIf="registerForm.controls['username'].invalid; else emailError">Nome inválido!</p>
+    <ng-template #emailError>
+      <p *ngIf="registerForm.controls['email'].invalid; else passwordError">Email inválido!</p>
+    </ng-template>
+    <ng-template #passwordError>
+      <p *ngIf="registerForm.controls['password'].invalid; else defaultError">Senha inválida!</p>
+    </ng-template>
+    <ng-template #defaultError>
+      <p>Ocorreu um erro, tente novamente mais tarde!</p>
+    </ng-template>
+  </div>
+  <button type="submit" class="login-btn login-btn-primary">Registrar</button>
+  <button type="button" class="login-btn login-btn-secondary" (click)="changeAuthType.emit()">Login</button>
+</form>

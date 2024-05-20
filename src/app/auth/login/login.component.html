@@ -1,0 +1,23 @@
+<h1 class="login-title">Login</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="login-form-group">
+    <input type="email" formControlName="email" placeholder="Email" />
+  </div>
+  <div class="login-form-group">
+    <input type="password" formControlName="password" placeholder="Senha" />
+  </div>
+
+
+  <div *ngIf="formInvalid()" class="login-alert login-alert-danger">
+    <p *ngIf="loginForm.controls['email'].invalid; else passwordError">Email inválido!</p>
+    <ng-template #passwordError>
+      <p *ngIf="loginForm.controls['password'].invalid; else defaultError">Senha inválida!</p>
+    </ng-template>
+    <ng-template #defaultError>
+      <p>Email e senha inválidos!</p>
+    </ng-template>
+ </div>
+
+  <button type="submit" class="login-btn login-btn-primary">Login</button>
+  <button type="button" class="login-btn login-btn-secondary" (click)="changeAuthType.emit()">Registrar</button>
+</form>

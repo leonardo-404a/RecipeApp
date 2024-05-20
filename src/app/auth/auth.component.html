@@ -1,0 +1,12 @@
+<div class="modal-background">
+  <div class="modal-container">
+    <div [ngSwitch]="authType">
+      <div *ngSwitchCase="AuthType.LOGIN">
+        <login (changeAuthType)="this.setAuthType(AuthType.SIGNUP)" (loginSuccess)="onLoginSuccess()" />
+      </div>
+      <div *ngSwitchDefault>
+        <register (changeAuthType)="this.setAuthType(AuthType.LOGIN)" />
+      </div>
+    </div>
+  </div>
+</div>
